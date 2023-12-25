@@ -8,6 +8,7 @@ public class LizardCell implements CellInterface {
         if (sumLizard+1 <= sumRus || age > 3){
             return new EmptyCell();
         }
+        age++;
         return this;
     }
 
