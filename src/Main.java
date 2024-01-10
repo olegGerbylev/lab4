@@ -1,5 +1,4 @@
-import cells.CellInterface;
-import cells.BaikalWaterCell;
+
 import utils.StringToCoordinate;
 
 import java.util.Scanner;

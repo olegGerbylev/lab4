@@ -2,7 +2,7 @@ import cells.*;
 import utils.StringToCoordinate;
 
 public class Field {
-    CellInterface[][] currentField = new CellInterface[20][20];
+    EmptyCell[][] currentField = new EmptyCell[20][20];
     StringToCoordinate utils = new StringToCoordinate();
     int stepGame, sumRus = 0, sumLizard = 0, sumBaikalWater = 0;;
     String[][] copyCurrentField = new String[20][20];
@@ -13,7 +13,7 @@ public class Field {
         for(int i =0; i < currentField.length; i++){
             for (int j =0; j < currentField[0].length; j++){
                 if (currentField[i][j] == null){
-                    currentField[i][j] = new EmptyCell();
+                    currentField[i][j] = new EmptyCell(i,j);
                 }
             }
         }
@@ -26,18 +26,7 @@ public class Field {
         while (stepGame > 0) {
             for (int i = 0; i < currentField.length; i++){
                 for (int j = 0; j < currentField[0].length; j++){
-                    this.sumRus = 0;
-                    this.sumLizard = 0;
-                    this.sumBaikalWater = 0;
-                    getNeighborValue(copyCurrentField, i-1, j-1);
-                    getNeighborValue(copyCurrentField, i-1, j);
-                    getNeighborValue(copyCurrentField, i-1, j+1);
-                    getNeighborValue(copyCurrentField, i, j-1);
-                    getNeighborValue(copyCurrentField, i, j+1);
-                    getNeighborValue(copyCurrentField, i+1, j-1);
-                    getNeighborValue(copyCurrentField, i+1, j);
-                    getNeighborValue(copyCurrentField, i+1, j+1);
-                    currentField[i][j] = currentField[i][j].step(sumRus,sumLizard,sumBaikalWater);
+                    currentField[i][j] = currentField[i][j].step(copyCurrentField);
                 }
             }
             stepGame--;
@@ -46,28 +35,16 @@ public class Field {
         }
     }
 
-    public void getNeighborValue(String[][] field, int neighborRow, int neighborCol) {
-        if (neighborRow >= 0 && neighborRow < field.length && neighborCol >= 0 && neighborCol < field[0].length) {
-            if (field[neighborRow][neighborCol] == "W"){
-                sumBaikalWater++;
-            }else if (field[neighborRow][neighborCol] == "L"){
-                sumLizard++;
-            }else if (field[neighborRow][neighborCol] == "R"){
-                sumRus++;
-            }
-        }
-    }
-    
     public void printAndCopyState(){
         for(int i =0; i < this.currentField.length; i++){
             for (int j =0; j < this.currentField[0].length; j++){
                 String symbol = switch (currentField[i][j].getClass().getSimpleName()) {
-                    case ("BaikalWaterCell"):
-                        yield "W";
-                    case ("LizardCell"):
-                        yield "L";
-                    case ("RusCell"):
+                    case ("Grass"):
+                        yield "G";
+                    case ("Rabbit"):
                         yield "R";
+                    case ("Snake"):
+                        yield "S";
                     default:
                         yield "_";
                 };
