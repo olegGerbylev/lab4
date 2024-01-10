@@ -18,6 +18,9 @@ public class Main {
         in.close();
 
         int N = 20;
-        new Field(RusCoordinates, LizardCoordinates, BaikalWaterCoordinates, N);
+        Field field = new Field(RusCoordinates, LizardCoordinates, BaikalWaterCoordinates);
+        for(int i =0; i < 20; i++){
+            field.step();
+        }
     }
 }
