@@ -67,6 +67,5 @@ public class Field {
             }
             currentField[coordinate[0]][coordinate[1]] = new Grass(coordinate[0], coordinate[1]);
         }
-
     }
 }

@@ -5,12 +5,13 @@ public class Rabbit extends EmptyCell{
     protected int age = 0;
     public Rabbit(int x, int y) {
         super(x, y);
+        intType = 1;
     }
 
     @Override
     public EmptyCell step(EmptyCell[][] field){
         getSum(field);
-        if (rabbit <= snake || age > 3){
+        if (sumOfEntity[1] <= sumOfEntity[0] || age > 3){
             return new EmptyCell(x, y);
         }
         age++;
