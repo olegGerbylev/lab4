@@ -7,16 +7,17 @@ public class Grass extends EmptyCell{
     }
 
     @Override
-    public EmptyCell step(String[][] field){
-        int[] entitySum = super.getSum(field);
-        int snake = entitySum[0];
-        int rabbit = entitySum[1];
-        int grass = entitySum[2];
+    public EmptyCell step(EmptyCell[][] field){
+        getSum(field);
         if (grass < rabbit){
-            return new EmptyCell(super.getX(), super.getY());
+            return new EmptyCell(x, y);
         }
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "G";
+    }
 
 }
