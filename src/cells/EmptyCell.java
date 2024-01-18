@@ -36,9 +36,9 @@ public class EmptyCell {
     }
 
     private void getNeighborValue(EmptyCell[][] field, int neighborRow, int neighborCol) {
-        if (neighborRow >= 0 && neighborRow < field.length && neighborCol >= 0 && neighborCol < field[0].length) {
+//        if (neighborRow >= 0 && neighborRow < field.length && neighborCol >= 0 && neighborCol < field[0].length) {
             sumOfEntity[field[neighborRow][neighborCol].intType]++;
-        }
+//        }
     }
 
     @Override
